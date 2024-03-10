@@ -16,10 +16,8 @@ const answers = [
 ]
 
 const drawAnswer = () => {
-    for (const el of answers) {
-        let randomAnswer = Math.floor(Math.random() * answers.length)
-        answer.textContent = answers[randomAnswer]
-    }
+        const randomAnswer = Math.floor(Math.random() * answers.length)
+        answer.innerHTML = `<span>Odpowiedź:</span> ${answers[randomAnswer]}`
 }
 
 const emptyCheck = () => {
@@ -28,11 +26,10 @@ const emptyCheck = () => {
 
 	if (question.value === "") {
 		error.textContent = "Musisz zadać pytanie!"
-	} else if (question.value.charAt(question.value.length - 1) !== "?") {
+	} else if (question.value.slice(-1) !== "?") {
 		error.textContent = 'Pytanie musi być zakończone znakiem "?".'
 	} else {
 		drawAnswer()
-        error.textContent = ''
 	}
 }
 
@@ -40,6 +37,7 @@ const showAnswer = () => {
 	ball.classList.add("shake-animation")
 	setTimeout(emptyCheck, 1000);
     answer.textContent = ''
+	error.textContent = ''
 }
 
 ball.addEventListener("click", showAnswer)
